@@ -7,7 +7,7 @@ Calculate and provide the byte offset value required for `unsquashfs` to extract
 Inspired by SuperUser question "How can I extract files from an AppImage?" https://superuser.com/q/1301583/443147.
 
 ## Dependencies:
-`readelf` (or) `python`, `unsquashfs`
+`readelf` (or) `python`, `unsquashfs`, `dwarfs`
 
 ## Usage
 ```bash

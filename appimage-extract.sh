@@ -54,6 +54,16 @@ if [ -d "$dest" ]; then
   exit 1
 fi
 
-unsquashfs -o "$offset" -d "$dest" "$1"
+# Conditionally use unsquashfs or dwarfsextract
+if unsquashfs -o "$offset" -d "$dest" "$1" 2>/dev/null; then
+  # TODO: add better messaging around non-"superblock" errors
+  echo # no-op
+else
+  # fallback to dwarfs
+  echo "Using dwarfsextract..."
+  dest="$(dirname "$dest")/dwarfs-root"
+  mkdir "$dest"
+  dwarfsextract -O "$offset" -o "$dest" -i "$1"
+fi
 
 find "$dest"
